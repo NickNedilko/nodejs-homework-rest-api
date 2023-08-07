@@ -27,6 +27,8 @@ versionKey: false
 }
 )
   
+const Contact = model("contact", contactsSchema);
+
 contactsSchema.post("save", handleMongooseError);
 
 
@@ -52,7 +54,7 @@ const schemas = {
     
 
 
-const Contact = model("contact", contactsSchema);
+
 
 module.exports = {
     Contact,
@@ -60,14 +62,3 @@ module.exports = {
 };
 
 
-// const schemas = {
-//     addSchema,
-//     updateFavoriteSchema,
-// }
-
-// const Book = model("book", bookSchema);
-
-// module.exports = {
-//     Book,
-//     schemas,
-// }
