@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const gravatar = require('gravatar');
-const nanoid = require('nanoid')
+const { v4 } = require("uuid");
 require("dotenv").config()
 
 
@@ -19,7 +19,8 @@ const register = async (req, res) => {
     const hashPassword = await bcrypt.hash(password, 10)
 
     const avatarUrl = gravatar.url(email);
-    const verificationToken = nanoid();
+    const verificationToken = v4();
+    console.log(verificationToken)
 
     const newUser = await User.create({ ...req.body, password: hashPassword, verificationToken, avatarUrl });
     const {BASE_URL}= process.env;
