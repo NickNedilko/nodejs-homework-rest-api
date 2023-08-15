@@ -31,7 +31,15 @@ const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
    avatarUrl: {
      type: String,
      required: true,
-  }
+   },
+   verify: {
+     type: Boolean,
+     default: false
+   },
+  verificationToken: {
+    type: String,
+    required: [true, 'Verify token is required'],
+  },
  }, {
      versionKey: false,
      timestamps: true
@@ -58,11 +66,17 @@ const loginSchema = Joi.object({
       
 })
 
+const emailSchema =Joi.object({
+     email: Joi.string().pattern(emailRegex),
+            
+      
+})
 const User = model('user', userSchema);
 
 const schemas = {
     registerSchema,
-    loginSchema
+    loginSchema,
+    emailSchema
 }
 
 module.exports = {
